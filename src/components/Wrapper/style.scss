@@ -1,13 +1,24 @@
 @import "../../resources/scss/scssRules";
 
 .wrapper {
+  position: relative;
   height: calc(100vh - #{$header-height});
   background: linear-gradient(90deg, rgba(33, 57, 145, 0.03) 5%, rgba(69, 103, 205, 0.03) 52%, rgba(0, 212, 255, 0.03) 100%);
   overflow: auto;
-  
+  .btn-add-row{
+	display: none;
+	&.active{
+	  position: absolute;
+	  top: 20px;
+	  left: 20px;
+	  display: flex;
+	  color: white;
+	  background: #213991;
+	}
+  }
   .common-table-field {
-    position: relative;
-	margin:  20px 0;
+	position: relative;
+	margin: 20px 0;
 	width: 60%;
 	height: 0;
 	opacity: 0;
@@ -27,6 +38,15 @@
 	  position: relative;
 	  flex: 1 1 auto;
 	  width: 100%;
+	  
+	  .fa-trash-alt {
+		@include font(30);
+		position: absolute;
+		top: 30%;
+		left: -23px;
+		color: transparent;
+		cursor: pointer;
+	  }
 	  
 	  .common-table-row__elem {
 		margin: 1%;
@@ -51,6 +71,9 @@
 		  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 		}
 		
+		.fa-trash-alt {
+		  color: #213991;
+		}
 	  }
 	}
   }
