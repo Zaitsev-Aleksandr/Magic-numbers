@@ -1,0 +1,243 @@
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+  $b: $b *1px;
+  $val: calc(#{$k} * 100vw + #{$b});
+  @return $val;
+}
+
+%fontStyleRoboto {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@mixin indentation($props, $sizes...) {
+  $list: null;
+  $val: null;
+  @for $i from 1 through length($sizes) {
+    $v-max: null;
+    $v-min: null;
+    $item: nth($sizes, $i);
+    @for $e from 1 through length($item) {
+      @if (nth($item, 1))=="!important" {
+        $elem: !important;
+        $list: append($list, !important, space);
+        $val: append($val, !important, space);
+      }
+      @if (nth($item, 1))==0 {
+        $elem: 0;
+        $list: append($list, 0, space);
+        $val: append($val, 0, space);
+      } @else {
+        @if $e==2 {
+          $v-min: nth($item, 1);
+          $v-max: nth($item, $e);
+          $elem: calcFluidFontSize($v-min, $v-max, 998, 1500);
+          $list: append($list, $elem, space);
+          $val: append($val, nth($item, $e)+px, space);
+        }
+      }
+    }
+  }
+  #{$props}: $list;
+
+  @media (min-width: 1500px) {
+    #{$props}: $val;
+  }
+}
+
+@mixin font($args...) {
+  $v-max: null;
+  $v-min: null;
+  $val: null;
+  $subValue: null;
+  @for $i from 1 through length($args) {
+    @if (nth($args, $i))=="!important" {
+      $val: append($val, !important, space);
+      $subValue: append($subValue, !important, space);
+    } @else {
+      $val: append($val, nth($args, $i)+px, space);
+      $v-max: nth($args, 1);
+      $v-min: nth($args, 1) * 0.75;
+      $subValue: append($subValue, calcFluidFontSize($v-min, $v-max, 998, 1500), space);
+    }
+  }
+  font-size: $subValue;
+  @media (min-width: 1500px) {
+    font-size: $val;
+  }
+}
+
+@mixin propsSize($prop, $v-min, $v-max, $bool:null) {
+  @media (min-width: 1500px) {
+    #{$prop}: $v-max *1px;
+  }
+  #{$prop}: calcFluidFontSize($v-min, $v-max, 998, 1500) $bool;
+}
+
+@mixin first-child-row {
+  span {
+    margin-left: 5px;
+    padding: 0;
+    width: 21px;
+    height: 21px;
+
+    span {
+      width: 100%;
+      height: 100%;
+
+      input {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #C9CFE3;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+%flexRowCenterCenter{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+ }
+
+%flexRowStartCenter{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  }
+
+%flexRowEndCenter{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+%flexRowBetweenCenter{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+%flexRowAroundCenter{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+%flexRowAroundStart{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: flex-start;
+}
+
+%flexColumnCenterCenter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+%flexColumnStartCenter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+%flexColumnAroundCenter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+%flexColumnBetweenCenter{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-between;
+}
+%flexColumnCenterEnd{
+  display: flex;
+  flex-direction:column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+
+%form-item-common-style {
+  @include indentation(padding, 0, (5, 20));
+  @extend %fontStyleRoboto;
+  border: 1px solid #C9CFE3;
+  @extend %flexRowStartCenter;
+  color: black;
+  border-radius: 6px;
+  @include font(14);
+
+
+
+  &::placeholder {
+    @extend %fontStyleRoboto;
+    @include font(14);
+    line-height: 16px;
+    color: #7D7D7D;
+  }
+}
+
+.my-btn {
+  @extend %fontStyleRoboto;
+  @include indentation(padding, (5, 8), (15, 30));
+  @include font(14);
+  @include propsSize(height, 28, 38);
+  @extend %flexRowCenterCenter;
+  white-space: nowrap;
+   border-radius: 6px!important;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.btn__false {
+  color: #7D7D7D;
+  border: 1px solid #C9CFE3 !important;
+  font-weight: 600;
+
+  &:hover {
+    color: #213991;
+    border-color: #213991!important;
+  }
+}
+
+.btn__true {
+  color: white;
+  border: 1px solid #213991;
+  background: #213991;
+
+  &:hover {
+    color: #213991;
+    background: white;
+
+  }
+}
+
+
+%list__notes-common {
+  @extend %fontStyleRoboto;
+  color: #7D7D7D;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  text-align: left;
+  height: 40px;
+    &:hover {
+    color: #213991;
+  }
+}
+
+
+$header-height: calcFluidFontSize(40, 65, 998, 1500);
