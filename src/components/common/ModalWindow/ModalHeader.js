@@ -1,5 +1,5 @@
 import React from 'react';
-import Close from "../common/icon/Close";
+import Close from "../icon/Close";
 
 const ModalHeader = ({title, toggleInfo}) => {
     return (

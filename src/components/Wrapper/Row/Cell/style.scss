@@ -1,0 +1,35 @@
+@import "../../../../resources/scss/scssRules";
+
+.table-row-sum__value{
+  @include font(20);
+  @include propsSize(width,100, 140);
+  font-weight: 600;
+  color: #FD8181;
+  background: #F0F1F8;
+  @extend %flexRowCenterCenter;
+  position: absolute;
+  @include propsSize(right, -100, -140);
+  height: 100%;
+  cursor: pointer;
+  &:hover{
+    background: #FFFFFF;
+    color: black;
+  }
+}
+.table-column-middle__block{
+  @include font(20);
+  font-weight: 600;
+  color: #FD8181;
+  background: #F0F1F8;
+  @include propsSize(height, 45, 60);
+  width: 100%;
+  position: absolute;
+  @include propsSize(bottom, -45, -60);
+  left: 0;
+  box-shadow: 6px 17px 35px rgba(0, 0, 0, 0.15);
+  .table-column-middle__item{
+	flex: 1 1 auto;
+	@extend %flexRowCenterCenter;
+	
+  }
+}

@@ -76,26 +76,6 @@
   #{$prop}: calcFluidFontSize($v-min, $v-max, 998, 1500) $bool;
 }
 
-@mixin first-child-row {
-  span {
-    margin-left: 5px;
-    padding: 0;
-    width: 21px;
-    height: 21px;
-
-    span {
-      width: 100%;
-      height: 100%;
-
-      input {
-        width: 18px;
-        height: 18px;
-        border: 2px solid #C9CFE3;
-        border-radius: 3px;
-      }
-    }
-  }
-}
 
 %flexRowCenterCenter{
   display: flex;
@@ -168,17 +148,20 @@
   justify-content: center;
 }
 
-
-%form-item-common-style {
-  @include indentation(padding, 0, (5, 20));
+.input-label{
+  @include font(16);
+  color: #7D7D7D;
+}
+.form-item-common-style {
+  @include indentation(padding, 0, (5,7), 0, (10, 20));
   @extend %fontStyleRoboto;
+@include propsSize(width, 80,110);
+  @include propsSize(height, 28, 38);
   border: 1px solid #C9CFE3;
   @extend %flexRowStartCenter;
   color: black;
   border-radius: 6px;
   @include font(14);
-
-
 
   &::placeholder {
     @extend %fontStyleRoboto;
@@ -202,7 +185,7 @@
   border: 1px solid transparent;
 }
 
-.btn__false {
+.btn__light {
   color: #7D7D7D;
   border: 1px solid #C9CFE3 !important;
   font-weight: 600;
@@ -213,7 +196,7 @@
   }
 }
 
-.btn__true {
+.btn__dark{
   color: white;
   border: 1px solid #213991;
   background: #213991;
@@ -226,18 +209,4 @@
 }
 
 
-%list__notes-common {
-  @extend %fontStyleRoboto;
-  color: #7D7D7D;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  text-align: left;
-  height: 40px;
-    &:hover {
-    color: #213991;
-  }
-}
-
-
-$header-height: calcFluidFontSize(40, 65, 998, 1500);
+$header-height: calcFluidFontSize(60, 90, 998, 1500);

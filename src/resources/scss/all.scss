@@ -1,0 +1,20 @@
+@import "scssRules";
+@import "scrollBar";
+html {
+  height: 100%;
+
+  body {
+    @include font(16);
+    height: 100%;
+
+    #root {
+      height: 100%;
+    }
+  }
+}
+
+@import "../../components/Header/style";
+@import "../../components/Wrapper/style";
+@import "../../components/common/ModalWindow/style";
+@import "../../components/Wrapper/Row/Cell/style";
+
