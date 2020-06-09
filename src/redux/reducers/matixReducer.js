@@ -14,8 +14,7 @@ export function matrixReducer(state = initialState, action) {
                 matrixArr: createField(action.payload.row, action.payload.column),
             };
         case UP_AMOUNT: {
-            console.log(action.payload);
-            const matrixArr = [...state.matrixArr];
+                  const matrixArr = [...state.matrixArr];
             const matrixArrRow = [...matrixArr[action.payload.x]];
             const item = {...matrixArrRow[action.payload.y]};
             item.amount = item.amount + 1;
